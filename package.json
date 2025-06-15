@@ -2,13 +2,13 @@
     "name": "shell-runner",
     "displayName": "Shell Runner",
     "description": "Execute shell scripts in the VS Code terminal",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "publisher": "firma",
     "repository": {
         "type": "git",
         "url": "https://github.com/firma2021/vscode-shell-runner"
     },
-    "icon": "img/icon.png",
+    "icon": "icon.png",
     "qna": "marketplace",
     "license": "MIT LICENSE",
     "engines": {

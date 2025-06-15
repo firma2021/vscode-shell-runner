@@ -96,9 +96,11 @@ class ShellRunner
             this.terminal.sendText('clear');
         }
 
-        let command = this.useSudo ? `sudo "${filePath}"` : `"${filePath}"`;
+        const executablePath = path.isAbsolute(filePath) ? filePath : `./${path.basename(filePath)}`;
+        let command = this.useSudo ? `sudo "${executablePath}"` : `"${executablePath}"`;
 
-        const currentFileArgs = this.savedArgs[filePath].args || '';
+        const saved = this.savedArgs[filePath];
+        const currentFileArgs = saved ? saved.args || '' : '';
         if (currentFileArgs.trim())
         {
             command += ` ${currentFileArgs}`;
