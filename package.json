@@ -2,7 +2,7 @@
     "name": "shell-runner",
     "displayName": "Shell Runner",
     "description": "Execute shell scripts in the VS Code terminal",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publisher": "firma",
     "repository": {
         "type": "git",

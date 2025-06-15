@@ -96,8 +96,8 @@ class ShellRunner
             this.terminal.sendText('clear');
         }
 
-        const executablePath = path.isAbsolute(filePath) ? filePath : `./${path.basename(filePath)}`;
-        let command = this.useSudo ? `sudo "${executablePath}"` : `"${executablePath}"`;
+        // filePath为绝对路径
+        let command = this.useSudo ? `sudo "${filePath}"` : `"${filePath}"`;
 
         const saved = this.savedArgs[filePath];
         const currentFileArgs = saved ? saved.args || '' : '';
