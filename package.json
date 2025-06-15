@@ -1,0 +1,141 @@
+{
+    "name": "shell-runner",
+    "displayName": "Shell Runner",
+    "description": "Execute shell scripts in the VS Code terminal",
+    "version": "1.0.3",
+    "publisher": "firma",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/firma2021/vscode-shell-runner"
+    },
+    "icon": "img/icon.png",
+    "qna": "marketplace",
+    "license": "MIT LICENSE",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "keywords": [
+        "bash",
+        "shellscript",
+        "sh",
+        ".sh",
+        "execute",
+        "run",
+        "terminal"
+    ],
+    "categories": [
+        "Programming Languages",
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:shellscript",
+        "onLanguage:bash",
+        "onLanguage:zsh",
+        "onLanguage:fish"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "shell-runner.run",
+                "category": "shell runner",
+                "title": "Run Script",
+                "icon": "$(play)",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported"
+            },
+            {
+                "command": "shell-runner.setArgs",
+                "category": "shell runner",
+                "title": "Set Arguments",
+                "icon": "$(gear)",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported"
+            },
+            {
+                "command": "shell-runner.toggleSudo",
+                "category": "shell runner",
+                "title": "Toggle Sudo Mode",
+                "icon": "$(key)",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported"
+            },
+            {
+                "command": "shell-runner.toggleClear",
+                "category": "shell runner",
+                "title": "Toggle Clear Terminal",
+                "icon": "$(clear-all)",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported"
+            },
+            {
+                "command": "shell-runner.makeExecutable",
+                "category": "shell runner",
+                "title": "Add Execute Permission for Owner",
+                "icon": "$(tools)",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "shell-runner.run",
+                "key": "F5",
+                "enablement": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported && !inDebugMode"
+            }
+        ],
+        "menus": {
+            "editor/title/run": [
+                {
+                    "command": "shell-runner.run",
+                    "when": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported",
+                    "group": "navigation@10"
+                },
+                {
+                    "command": "shell-runner.setArgs",
+                    "when": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported",
+                    "group": "navigation@10.1"
+                },
+                {
+                    "command": "shell-runner.makeExecutable",
+                    "when": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported",
+                    "group": "navigation@10.2"
+                },
+                {
+                    "command": "shell-runner.toggleSudo",
+                    "when": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported",
+                    "group": "navigation@10.3"
+                },
+                {
+                    "command": "shell-runner.toggleClear",
+                    "when": "(resourceLangId == shellscript || resourceLangId == bash || resourceLangId == zsh || resourceLangId == fish) && !isInDiffEditor && shellExecutionSupported",
+                    "group": "navigation@10.4"
+                }
+            ]
+        }
+    },
+
+    "scripts": {
+        "vscode:prepublish": "npm run package",
+        "compile": "npm run check-types && npm run lint && node esbuild.js",
+        "watch": "npm-run-all -p watch:*",
+        "watch:esbuild": "node esbuild.js --watch",
+        "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+        "package": "npm run check-types && npm run lint && node esbuild.js --production",
+        "compile-tests": "tsc -p . --outDir out",
+        "watch-tests": "tsc -p . -w --outDir out",
+        "pretest": "npm run compile-tests && npm run compile && npm run lint",
+        "check-types": "tsc --noEmit",
+        "lint": "eslint src",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.74.0",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@typescript-eslint/eslint-plugin": "^8.31.1",
+        "@typescript-eslint/parser": "^8.31.1",
+        "eslint": "^9.25.1",
+        "esbuild": "^0.25.3",
+        "npm-run-all": "^4.1.5",
+        "typescript": "^5.8.3",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.5.2"
+    }
+
+}
